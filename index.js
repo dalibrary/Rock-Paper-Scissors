@@ -1,77 +1,32 @@
-// Random Computer choice to give Rock, Paper, or scissors
-function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random() * 3) //Random Number from 0,1,2
-        if (randomNumber == 0) {
-            return "rock";
-    }   else if (randomNumber == 1) {
-            return "scissors";
-    }   else {
-        return "paper";
-    }
+// Winning conditions in Rock, Paper, Scissors
+const winConditions = {
+    rock: "scissors",
+    scissors: "paper",
+    paper: "rock" 
 }
 
-/* function playRound(playerSelection, computerSelection) {
-    if (playSelection === computerSelection) {
-        console.log("Tie");
-    }
-    if (
-        (playerSelection === "Rock" && computerSelection === "Scissors") || //player win conditions
-        (playerSelection === "Scissors" && computerSelection === "Paper") ||
-        (playerSelection === "Paper" && computerSelection === "Rock") ||
-    )  {
-        playerScore++;
-    }
-    if  (//computer win conditions
-        (computerSelection === "Rock" && playerSelection === "Scissors") ||
-        (computerSelection === "Scissors" && playerSelection === "Paper") ||
-        (computerSelection === "Paper" && playerSelection === "Rock") ||
-    )   {
-        computerScore++;
-    }
-} */
+// Random Computer choice to give Rock, Paper, or scissors
+function getComputerChoice() {
+    const computerChoices = Object.keys(winConditions);
+    let randomNumber = Math.floor(Math.random() * 3) //Random Number from 0,1,2
+    return computerChoices[randomNumber]
+  }
 
-/* function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-      return "Tie";
-    }
-    if (
-      (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||
-      (playerSelection === 'SCISSORS' && computerSelection === 'PAPER') ||
-      (playerSelection === 'PAPER' && computerSelection === 'ROCK')
-    ) {
-      playerScore++
-    }
-    if (
-      (computerSelection === 'ROCK' && playerSelection === 'SCISSORS') ||
-      (computerSelection === 'SCISSORS' && playerSelection === 'PAPER') ||
-      (computerSelection === 'PAPER' && playerSelection === 'ROCK')
-    ) {
-      computerScore++
-    }
-} */
-
+// play a round of RPS
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === computerSelection) {
-      return "Tie";
+      return `Tied! You chose ${playerSelection} and the computer chose ${computerSelection}`
     } 
-    if (
-      (playerSelection === "rock" && computerSelection === "scissors") ||
-      (playerSelection === "scissors" && computerSelection === "paper") ||
-      (playerSelection === "paper" && computerSelection === "rock")
-    ) {
-      return `You Win! You chose ${playerSelection} and the computer chose ${computerSelection}`;
-    } 
-    if (
-        (computerSelection === "rock" && playerSelection === "scissors") ||
-        (computerSelection === "scissors" && playerSelection === "paper") ||
-        (computerSelection === "paper" && playerSelection === "rock")
-      ) {
-        return `You lose! You chose ${playerSelection} and the computer chose ${computerSelection}`;
-      }
+
+    if (winConditions[playerSelection] === computerSelection) {
+    return `You Win! You chose ${playerSelection} and the computer chose ${computerSelection}`
+    } else {
+      return `You Lose! You chose ${playerSelection} and the computer chose ${computerSelection}`;
+    }
 }
 
-
+// GAME
 function game() {
     let playerScore = 0;
     let computerScore = 0;
@@ -82,8 +37,10 @@ function game() {
     console.log(result);
     if (result.includes("Win")) {
       playerScore++;
+      console.log(`Player score is: ${playerScore} Computer score is : ${computerScore}`);
     } else if (result.includes("Lose")) {
       computerScore++;
+      console.log(`Player score is: ${playerScore} Computer score is : ${computerScore}`);
     }
 }
     if (playerScore > computerScore) {
